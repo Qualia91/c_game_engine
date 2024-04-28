@@ -8,7 +8,6 @@
     "editor.fontFamily": "Liberation Mono",
     "editor.fontSize": 12,
     "editor.fontWeight": "1",
-    "workbench.editor.showTabs": "single",
     "workbench.colorCustomizations": {
         "editorCursor.foreground": "#00ff33",
         "editor.lineHighlightBackground": "#111144"
@@ -59,7 +58,11 @@
         "windowsx.h": "c",
         "vulkan_platform.h": "c",
         "renderer_frontend.h": "c",
-        "system_error": "c"
+        "system_error": "c",
+        "windows.h": "c",
+        "platform.h": "c",
+        "asserts.h": "c",
+        "stdarg.h": "c"
     },
     "C_Cpp.autocompleteAddParentheses": true,
     "json.schemaDownload.enable": false
