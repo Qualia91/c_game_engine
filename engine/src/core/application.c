@@ -5,6 +5,8 @@
 #include "platform/platform.h"
 #include "game_types.h"
 
+#include "core/kmemory.h"
+
 typedef struct application_state {
     game* game_inst;
     b8 is_running;
@@ -24,9 +26,6 @@ b8 application_create(game* game_inst) {
 
     app_state.game_inst = game_inst;
 
-    // initialise subsystems
-    initialise_logging();
-
     app_state.is_running = TRUE;
     app_state.is_suspended = FALSE;
 
@@ -40,7 +39,7 @@ b8 application_create(game* game_inst) {
         return FALSE;
     }
 
-    KASSERT_NOT_NULL(!app_state.game_inst->initialise(app_state.game_inst), "Game failed to initialise", FALSE);
+    KASSERT_MSG_RETURN(app_state.game_inst->initialise(app_state.game_inst), "Game failed to initialise", FALSE);
 
     app_state.game_inst->on_resize(app_state.game_inst, app_state.width, app_state.height);
 
@@ -50,6 +49,7 @@ b8 application_create(game* game_inst) {
 }
 
 b8 application_run() {
+    KINFO(get_memory_usage_string());
     while (app_state.is_running) {
         if (!platform_pump_messages(&app_state.platform_state)) {
             app_state.is_running = FALSE;

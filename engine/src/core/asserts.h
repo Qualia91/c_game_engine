@@ -34,7 +34,7 @@ KAPI void report_assertion_failure(const char* expression, const char* message, 
 
 #define KASSERT_NOT_NULL(expr, message, return_val)                  \
     {                                                                \
-        if (expr) {                                                  \
+        if (!expr) {                                                  \
             KFATAL(message);                                         \
             return return_val;                                       \
         }                                                            \

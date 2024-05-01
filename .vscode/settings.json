@@ -69,7 +69,20 @@
         "application.h": "c",
         "defines.h": "c",
         "game.h": "c",
-        "entry.h": "c"
+        "entry.h": "c",
+        "array": "cpp",
+        "iterator": "cpp",
+        "vector": "cpp",
+        "xtree": "cpp",
+        "format": "cpp",
+        "initializer_list": "cpp",
+        "span": "cpp",
+        "utility": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp",
+        "game_types.h": "c",
+        "logger.h": "c",
+        "kmemory.h": "c"
     },
     "C_Cpp.autocompleteAddParentheses": true,
     "json.schemaDownload.enable": false

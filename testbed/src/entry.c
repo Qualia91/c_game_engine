@@ -1,7 +1,7 @@
 #include "game.h"
 
 #include <entry.h>
-#include <platform/platform.h>
+#include <core/kmemory.h>
 
 b8 create_game(game* out_game) {
     
@@ -19,13 +19,7 @@ b8 create_game(game* out_game) {
     out_game->initialise(out_game);
 
 
-    out_game->state = platform_allocate(sizeof(game_state), FALSE);
+    out_game->state = kallocate(sizeof(game_state), MEMORY_TAG_GAME);
 
     return TRUE;
-}
-
-b8 destroy_game(game* out_game) {
-    platform_free(out_game->state, FALSE);
-
-    return FALSE;
 }
