@@ -62,7 +62,14 @@
         "windows.h": "c",
         "platform.h": "c",
         "asserts.h": "c",
-        "stdarg.h": "c"
+        "stdarg.h": "c",
+        "iosfwd": "c",
+        "xlocbuf": "c",
+        "xlocale": "c",
+        "application.h": "c",
+        "defines.h": "c",
+        "game.h": "c",
+        "entry.h": "c"
     },
     "C_Cpp.autocompleteAddParentheses": true,
     "json.schemaDownload.enable": false

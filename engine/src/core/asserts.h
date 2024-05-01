@@ -15,6 +15,31 @@
 
 KAPI void report_assertion_failure(const char* expression, const char* message, const char* file, i32 line);
 
+#define KASSERT_RETURN(expr, return_val)                             \
+    {                                                                \
+        if (expr) {                                                  \
+        } else {                                                     \
+            return return_val;                                       \
+        }                                                            \
+    }
+
+#define KASSERT_MSG_RETURN(expr, message, return_val)                \
+    {                                                                \
+        if (expr) {                                                  \
+        } else {                                                     \
+            KFATAL(message);                                         \
+            return return_val;                                       \
+        }                                                            \
+    }
+
+#define KASSERT_NOT_NULL(expr, message, return_val)                  \
+    {                                                                \
+        if (expr) {                                                  \
+            KFATAL(message);                                         \
+            return return_val;                                       \
+        }                                                            \
+    }
+
 #define KASSERT(expr)                                                \
     {                                                                \
         if (expr) {                                                  \

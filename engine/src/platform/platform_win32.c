@@ -28,7 +28,7 @@ b8 platform_startup(
         i32 height) {
 
     platform_state->internal_state = malloc(sizeof(internal_state));
-    KASSERT(platform_state->internal_state != NULL);
+    KASSERT_RETURN(platform_state->internal_state, FALSE);
     internal_state *state = (internal_state *)platform_state->internal_state;
 
     state->h_instance = GetModuleHandleA(0);
