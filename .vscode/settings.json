@@ -82,7 +82,21 @@
         "xutility": "cpp",
         "game_types.h": "c",
         "logger.h": "c",
-        "kmemory.h": "c"
+        "kmemory.h": "c",
+        "event.h": "c",
+        "compare": "cpp",
+        "memory": "cpp",
+        "tuple": "cpp",
+        "xmemory": "cpp",
+        "xtr1common": "cpp",
+        "algorithm": "c",
+        "functional": "c",
+        "expected": "c",
+        "optional": "c",
+        "xlocmon": "c",
+        "darray.h": "c",
+        "winuser.h": "c",
+        "xiosbase": "c"
     },
     "C_Cpp.autocompleteAddParentheses": true,
     "json.schemaDownload.enable": false

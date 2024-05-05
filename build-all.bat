@@ -3,6 +3,10 @@ REM Build Everything
 
 ECHO "Building everything..."
 
+PUSHD engine
+CALL test.bat
+POPD
+IF %ERRORLEVEL% NEQ 0 (echo Error:%ERRORLEVEL% && exit)
 
 PUSHD engine
 CALL build.bat

@@ -4,6 +4,7 @@
 #include "core/logger.h"
 #include "core/asserts.h"
 #include "core/kmemory.h"
+#include <containers/darray.h>
 
 #include "game_types.h"
 
