@@ -75,15 +75,15 @@ void* _darray_pop_at(void* array, u64 index, void* dest) {
     }
 
     u64 stride = darray_stride(array);
-    u64 index_addr = (u64)array;
-    index_addr += (index * stride);
+    u64 addr = (u64)array;
+    u64 index_addr = addr + (index * stride);
 
     kcopy_memory(dest, (void*)index_addr, stride);
 
-    if (index != length - 1) {
+    if (index != length) {
         
-        u64 start_addr = index_addr + (index * stride);
-        u64 end_addr = index_addr + ((length - 1) * stride);
+        u64 start_addr = addr + (index * stride);
+        u64 end_addr = addr + ((length - 1) * stride);
 
         kcopy_memory(
             (void*)start_addr,
@@ -112,7 +112,7 @@ void* _darray_insert_at(void* array, u64 index, const void* value_ptr) {
     u64 index_addr = (u64)array;
     index_addr += (index * stride);
 
-    if (index != length - 1) {
+    if (index != length) {
         
         u64 data_stride = (length - index) * stride;
         u64 new_start_addr = index_addr + (index * stride);
