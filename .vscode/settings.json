@@ -96,7 +96,12 @@
         "xlocmon": "c",
         "darray.h": "c",
         "winuser.h": "c",
-        "xiosbase": "c"
+        "xiosbase": "c",
+        "linked_list.h": "c",
+        "test_lib.h": "c",
+        "darray_test.h": "c",
+        "linked_list_test.h": "c",
+        "event_test.h": "c"
     },
     "C_Cpp.autocompleteAddParentheses": true,
     "json.schemaDownload.enable": false

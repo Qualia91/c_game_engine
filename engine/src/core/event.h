@@ -6,12 +6,12 @@ typedef struct event_context {
     // 128 bytes
     union {
         i64 i64[2];
-        u64 i64[2];
-        f64 i64[2];
+        u64 u64[2];
+        f64 f64[2];
         
-        i32 i64[4];
-        u32 i64[4];
-        f32 i64[4];
+        i32 i32[4];
+        u32 u32[4];
+        f32 f32[4];
         
         i16 i16[8];
         u16 u16[8];
@@ -25,9 +25,9 @@ typedef b8 (*PFN_on_event)(u16 code, void* sender, void* listener_inst, event_co
 b8 event_initialise();
 void event_shutdown();
 
-KAPI void event_register(u16 code, void* listener, PFN_on_event on_event);
-KAPI void event_unregister(u16 code, void* listener, PFN_on_event on_event);
-void event_fire(u16 code, void* sender, PFN_on_event on_event);
+KAPI b8 event_register(u16 code, void* listener, PFN_on_event on_event);
+KAPI b8 event_unregister(u16 code, void* listener, PFN_on_event on_event);
+b8 event_fire(u16 code, void* sender, event_context context);
 
 // System internal event codes. Application should use codes beyond 255.
 typedef enum system_event_code {
