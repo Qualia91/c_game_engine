@@ -23,6 +23,31 @@ static b8 initialised = FALSE;
 
 static application_state app_state;
 
+b8 on_application_event(u16 code, void* sender, void* listener_inst, event_context context) {
+    switch (code) {
+        case EVENT_CODE_APPLICATION_QUIT:
+            KINFO("EVENT_CODE_APPLICATION_QUIT received, shutting down.\n")
+            app_state.is_running = FALSE;
+            return TRUE;
+    }
+    return FALSE;
+}
+
+b8 on_application_key(u16 code, void* sender, void* listener_inst, event_context context) {
+    switch (code) {
+        case EVENT_CODE_KEY_PRESSED:
+            if (context.data.u16[0] == KEY_ESCAPE) {
+                event_context context = {};
+                event_fire(EVENT_CODE_APPLICATION_QUIT, 0, context);
+                return TRUE;
+            }
+            break;
+        case EVENT_CODE_KEY_RELEASED:
+            break;
+    }
+    return FALSE;
+}
+
 b8 application_create(game* game_inst) {
     KASSERT_MSG_RETURN(!initialised, "Application create called more than once", FALSE);
 
@@ -37,6 +62,21 @@ b8 application_create(game* game_inst) {
     }
     
     input_initialise();
+
+    if (!event_register(EVENT_CODE_KEY_PRESSED, 0, on_application_key)) {
+        KERROR("Application key pressed listener not set up");
+        return FALSE;
+    }
+
+    if (!event_register(EVENT_CODE_KEY_RELEASED, 0, on_application_key)) {
+        KERROR("Application key released listener not set up");
+        return FALSE;
+    }
+
+    if (!event_register(EVENT_CODE_APPLICATION_QUIT, 0, on_application_event)) {
+        KERROR("Application event listener not set up");
+        return FALSE;
+    }
 
     if (!platform_startup(
             &app_state.platform_state,
@@ -60,6 +100,7 @@ b8 application_create(game* game_inst) {
 b8 application_run() {
     KINFO(get_memory_usage_string());
     while (app_state.is_running) {
+
         if (!platform_pump_messages(&app_state.platform_state)) {
             app_state.is_running = FALSE;
         }
@@ -85,9 +126,7 @@ b8 application_run() {
     app_state.is_running = FALSE;
     
     input_shutdown();
-    
     event_shutdown();
-
     platform_shutdown(&app_state.platform_state);
 
     return TRUE;

@@ -112,7 +112,6 @@ b8 event_fire(u16 code, void* sender, event_context context) {
 
     // Check if events is empty
     if (state.registered[code].events == 0) {
-        KWARNING("No events, cant fire event");
         return FALSE;
     }
 
