@@ -5,6 +5,7 @@
 #include "platform/platform.h"
 #include "game_types.h"
 #include "core/event.h"
+#include "core/input.h"
 
 #include "core/kmemory.h"
 
@@ -34,6 +35,8 @@ b8 application_create(game* game_inst) {
         KERROR("Event system failed initialization. Application cannot continue.");
         return FALSE;
     }
+    
+    input_initialise();
 
     if (!platform_startup(
             &app_state.platform_state,
@@ -62,6 +65,7 @@ b8 application_run() {
         }
 
         if (!app_state.is_suspended) {
+
             if (!app_state.game_inst->update(app_state.game_inst, (f32)0)) {
                 KFATAL("Game update failed, shutting down");
                 app_state.is_running = FALSE;
@@ -73,10 +77,14 @@ b8 application_run() {
                 app_state.is_running = FALSE;
                 break;
             }
+
+            input_update(0);
         }
     }
 
     app_state.is_running = FALSE;
+    
+    input_shutdown();
     
     event_shutdown();
 
